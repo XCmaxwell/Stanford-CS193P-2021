@@ -9,15 +9,21 @@ import SwiftUI
 
 struct ContentView: View {
     var emojis = ["🐶","🐱","🐭","🐹", "🐰","🦊","🐻","🐼","🐻‍❄️","🐨","🐯","🦁","🐮","🐷","🐽","🐸","🐵","🙈","🙉"," 🙊","🐒","🐔","🐧","🐦","🐤"," 🐣","🐥","🦆","🦅","🦉","🦇",]
-    @State var horCount = 4
+    @State var horCount = 24
     var body: some View {
         VStack {
-            HStack {
-                ForEach(emojis[0..<horCount],id: \.self, content: {emoji in
-                    CardView(content: emoji)
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 65, maximum: 150))], content: {
+                    ForEach(emojis[0..<horCount],id: \.self, content: {emoji in
+                        CardView(content: emoji)
+                            .aspectRatio(2/3, contentMode: .fit)
+                    })
                 })
             }
+            .foregroundColor(.red)
+            
             Spacer()
+            
             HStack {
                 removeView
                 Spacer()
@@ -25,7 +31,7 @@ struct ContentView: View {
             }.padding(.horizontal).font(.largeTitle)
         }
         .padding()
-        .foregroundColor(.red)
+        
     }
     
     var removeView : some View {
@@ -58,8 +64,8 @@ struct CardView : View {
         let shape = RoundedRectangle(cornerRadius: 20)
         ZStack {
             if isFaceUp {
-                shape.stroke(lineWidth: 3)
                 shape.fill().foregroundColor(.white)
+                shape.strokeBorder(lineWidth: 3)
                 Text(content).font(.largeTitle)
             } else {
                 shape.fill()
