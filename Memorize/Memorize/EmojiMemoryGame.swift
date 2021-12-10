@@ -6,12 +6,18 @@
 //
 
 import SwiftUI
-func makeCarcContent(index: Int) -> String {
-    return "🐶"
-}
 
 class EmojiMemoryGame {
-    private var model: MemoryGame<String> = MemoryGame<String>(numberOfPairsOfCards: 4, createCardContent: makeCarcContent(index:))
+    static var emojis = ["🐶","🐱","🐭","🐹", "🐰","🦊","🐻","🐼","🐻‍❄️","🐨","🐯","🦁","🐮","🐷","🐽","🐸","🐵","🙈","🙉"," 🙊","🐒","🐔","🐧","🐦","🐤"," 🐣","🐥","🦆","🦅","🦉","🦇",]
+    
+    static func createMemoryGame() -> MemoryGame<String> {
+        MemoryGame<String>(numberOfPairsOfCards: 4) { index in
+            EmojiMemoryGame.emojis[index]
+        }
+    }
+    
+    private var model: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
+    
     var cards: Array<MemoryGame<String>.Card> {
         return model.cards
     }
