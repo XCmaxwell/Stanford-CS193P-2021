@@ -21,39 +21,10 @@ struct ContentView: View {
                 })
             }
             .foregroundColor(.red)
-            
-            Spacer()
-            
-            HStack {
-                removeView
-                Spacer()
-                addView
-            }.padding(.horizontal).font(.largeTitle)
         }
         .padding()
         
     }
-    
-    var removeView : some View {
-        Button {
-            if horCount > 1 {
-                horCount -= 1
-            }
-        } label: {
-            Image(systemName: "minus.circle")
-        }
-    }
-    var addView : some View {
-        Button {
-            if horCount < emojis.count {
-                horCount += 1
-            }
-        } label: {
-            Image(systemName: "plus.circle")
-        }
-    }
-    
-    
 }
 
 struct CardView : View {
